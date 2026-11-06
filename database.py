@@ -7,6 +7,9 @@ load_dotenv()
 
 DATABASE_URL = os.getenv("DB_URL")
 
+if not DATABASE_URL:
+    raise ValueError("DATABASE_URL is not configured")
+
 engine = create_engine(DATABASE_URL)
 
 SessionLocal = sessionmaker(bind=engine)
