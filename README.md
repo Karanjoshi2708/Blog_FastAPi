@@ -50,9 +50,10 @@ it does not create, delete, or manage that database.
 1. Push the project to a GitHub repository. Do not commit `.env`, your virtual
    environment, or secrets.
 2. In Render, select **New → Blueprint** and connect this repository.
-3. Enter the existing PostgreSQL database's **internal** connection URL for
-   `DB_URL` when Render prompts for environment values. Do not use the external
-   URL for services running in the same Render region.
+3. Enter the existing PostgreSQL database's **external** connection URL for
+   `DB_URL` when Render prompts for environment values. The Blueprint deploys
+   its services in Oregon while the existing database is in Ohio, so its
+   internal hostname is not reachable from these services.
 4. Enter a strong `ADMIN_USERNAME` and `ADMIN_PASSWORD` when prompted. These
    values and `SECRET_KEY` are never stored in Git.
 5. Apply the Blueprint. The UI gets the API's private host and port
