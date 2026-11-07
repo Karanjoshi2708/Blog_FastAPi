@@ -43,28 +43,30 @@ pagination, creating, editing, and deleting blog posts.
 
 ## Deploy the complete app to Render
 
-The Blueprint creates a PostgreSQL database, a FastAPI API service, and a
-Streamlit UI service. The database and paid web-service plans may incur charges;
-review the current Render pricing before applying the Blueprint.
+The Blueprint creates a FastAPI API service and a Streamlit UI service. To use
+Render's free plan, this setup reuses an existing Render PostgreSQL database;
+it does not create, delete, or manage that database.
 
 1. Push the project to a GitHub repository. Do not commit `.env`, your virtual
    environment, or secrets.
 2. In Render, select **New → Blueprint** and connect this repository.
-3. Review the resources from `render.yaml` and the associated prices, then
-   apply the Blueprint.
-4. In the Render dashboard, open the **blog-api** service's environment
-   settings and set `ADMIN_USERNAME` and `ADMIN_PASSWORD` to your own strong
-   credentials. These are intentionally not stored in Git.
-5. Wait for the database and both services to finish deploying. The UI gets
-   the API's private host and port from the Blueprint automatically.
+3. Enter the existing PostgreSQL database's **internal** connection URL for
+   `DB_URL` when Render prompts for environment values. Do not use the external
+   URL for services running in the same Render region.
+4. Enter a strong `ADMIN_USERNAME` and `ADMIN_PASSWORD` when prompted. These
+   values and `SECRET_KEY` are never stored in Git.
+5. Apply the Blueprint. The UI gets the API's private host and port
+   automatically.
 6. Open the public URL shown for **blog-streamlit-ui**, sign in with the admin
    credentials, and test creating and editing a post. The API is also available
    at its own Render URL; `/docs` shows its OpenAPI documentation.
 
 The API uses the existing SQLAlchemy `Blog` model and creates its table when
-the API starts. Render supplies the database connection and a generated JWT
-secret. For production schema changes beyond this initial model, use a database
-migration tool rather than relying on `create_all`.
+the API starts. Render generates a JWT secret. Render's free Postgres expires
+30 days after creation; this deployment reuses your existing `blog` database,
+so preserve the database and its data before its expiry. For production schema
+changes beyond this initial model, use a database migration tool rather than
+relying on `create_all`.
 
 ## Configuration and security
 
