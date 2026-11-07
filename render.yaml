@@ -2,14 +2,14 @@ databases:
   - name: blog-database
     databaseName: blog
     user: blog_user
-    plan: basic-256mb
+    plan: free
     postgresMajorVersion: "17"
 
 services:
   - type: web
     name: blog-api
     runtime: python
-    plan: starter
+    plan: free
     buildCommand: pip install -r requirements-api.txt
     startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /
@@ -28,7 +28,7 @@ services:
   - type: web
     name: blog-streamlit-ui
     runtime: python
-    plan: starter
+    plan: free
     buildCommand: pip install -r requirements-ui.txt
     startCommand: streamlit run streamlit_app.py --server.address 0.0.0.0 --server.port $PORT
     envVars:
