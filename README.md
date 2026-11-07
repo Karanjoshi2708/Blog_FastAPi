@@ -76,8 +76,8 @@ relying on `create_all`.
   and `postgresql://` URLs and configures the `psycopg` SQLAlchemy driver.
 - `SECRET_KEY`: signing secret for short-lived JWT access tokens.
 - `ADMIN_USERNAME` and `ADMIN_PASSWORD`: required API login credentials.
-- `API_BASE_URL`: API host and port used by Streamlit; configured from the API
-  service automatically in the Render Blueprint.
+- `API_BASE_URL`: public HTTPS URL of the API, entered manually when Render
+  prompts for Blueprint environment values.
 
 The API's `/login` endpoint uses OAuth2 form fields (`username` and `password`).
 Do not expose the API without setting unique admin credentials and keeping the
