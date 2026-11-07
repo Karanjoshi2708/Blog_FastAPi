@@ -54,10 +54,11 @@ it does not create, delete, or manage that database.
    `DB_URL` when Render prompts for environment values. The Blueprint deploys
    its services in Oregon while the existing database is in Ohio, so its
    internal hostname is not reachable from these services.
-4. Enter a strong `ADMIN_USERNAME` and `ADMIN_PASSWORD` when prompted. These
-   values and `SECRET_KEY` are never stored in Git.
-5. Apply the Blueprint. The UI gets the API's private host and port
-   automatically.
+4. Enter `API_BASE_URL` as the API's public HTTPS URL (for example,
+   `https://blog-api-xxxx.onrender.com`), plus a strong `ADMIN_USERNAME` and
+   `ADMIN_PASSWORD`. Free services cannot rely on private service networking.
+   These values and `SECRET_KEY` are never stored in Git.
+5. Apply the Blueprint.
 6. Open the public URL shown for **blog-streamlit-ui**, sign in with the admin
    credentials, and test creating and editing a post. The API is also available
    at its own Render URL; `/docs` shows its OpenAPI documentation.

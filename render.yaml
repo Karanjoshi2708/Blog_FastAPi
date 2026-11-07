@@ -24,7 +24,4 @@ services:
     startCommand: streamlit run streamlit_app.py --server.address 0.0.0.0 --server.port $PORT
     envVars:
       - key: API_BASE_URL
-        fromService:
-          type: web
-          name: blog-api
-          property: hostport
+        sync: false
